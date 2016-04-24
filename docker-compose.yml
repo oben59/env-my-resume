@@ -1,0 +1,25 @@
+# Docker-compose file
+# @author oben59<benoit.oyez@telecomnancy.net>
+##
+
+version: '2'
+
+services:
+  fpm:
+    image: oben59/my-resume_fpm
+    networks:
+      - default
+
+  webserver:
+    image: oben59/my-resume_webserver
+    ports:
+      - 80
+    environment:
+      - VIRTUAL_HOST=my-resume.localhost
+    networks:
+      - default
+      - front
+
+networks:
+  front:
+    external: true
